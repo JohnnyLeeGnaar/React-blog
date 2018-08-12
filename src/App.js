@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
 class App extends Component {
-  constructor(props){
-   super(props);
-   this.state = {
-     posts: [],
-   };
-   }
-   
-   componentDidMount(){
-  fetch('https://jsonplaceholder.typicode.com/todos/')
-  .then(response => response.json())
-  .then(data => { let posts = data.response.map((post) => {return(
-    <div key={post.id}> </div>
+  state = {
+    posts: [],
+    loading: false
+  };
 
-  )
-  })
-  this.setState({posts:posts});
-  console.log("state", this.state.posts);
-  })
-}
+  fetchPosts() {
+    this.setState({ loading: true });
 
-  
-  render() {
-    return (
-      <div>
-        {console.table(this.state.data)}  
-      </div>
-    );
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(posts => {
+        this.setState({ posts: posts });
+      })
+      .finally(() => this.setState({ loading: false }));
   }
-  
+
+  componentDidMount() {
+    this.fetchPosts();
+  }
+
+  render() {
+    const { posts, loading } = this.state;
+
+    return loading
+      ? 'Loading ...'
+      : posts.map((post, index) => (
+          <p key={post.id}>
+            {post.id}. {post.title}
+          </p>
+        ));
+  }
 }
 export default App;
