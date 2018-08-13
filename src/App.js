@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  state = {
-    posts: [],
-    loading: false
+  constructor(){
+    super();
+  this.state = {
+    posts: [1,2,3,4,5,6,7],
+    loading: false,
+    currentPage: 1,
+    postsPerPage: 5
   };
+  this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event){
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
 
   fetchPosts() {
     this.setState({ loading: true });
@@ -22,16 +34,46 @@ class App extends Component {
     this.fetchPosts();
   }
 
-  render() {
-    const { posts, loading } = this.state;
 
-    return loading
-      ? 'Loading ...'
-      : posts.map((post, index) => (
-          <p key={post.id}>
-            {post.id}. {post.title}
-          </p>
-        ));
+
+  render() {
+    const { posts, loading, currentPage, postsPerPage } = this.state;
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    const renderPosts = currentPosts.map((post, index) => {
+      return <li key={index}>{post.title}</li>;
+    });
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
+
+    return (
+      <div>
+        <ul>
+          {renderPosts}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
+      </div>
+    );
   }
 }
 export default App;
