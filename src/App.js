@@ -5,10 +5,10 @@ class App extends Component {
   constructor(){
     super();
   this.state = {
-    posts: [1,2,3,4,5,6,7],
+    posts: [],
     loading: false,
     currentPage: 1,
-    postsPerPage: 5
+    postsPerPage: 20
   };
   this.handleClick = this.handleClick.bind(this);
   }
