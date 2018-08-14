@@ -1,3 +1,17 @@
+table{
+  width: 100%;
+}
+td {
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 300px;
+}
+
+ul > li{
+  display: inline-block;
+}
+
+
 .App {
   text-align: center;
 }

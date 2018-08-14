@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
-  this.state = {
-    posts: [],
-    loading: false,
-    currentPage: 1,
-    postsPerPage: 20
-  };
-  this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      posts: [],
+      loading: false,
+      currentPage: 1,
+      postsPerPage: 20
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event){
+  handleClick(event) {
     this.setState({
       currentPage: Number(event.target.id)
     });
@@ -44,7 +44,15 @@ class App extends Component {
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const renderPosts = currentPosts.map((post, index) => {
-      return <li key={index}>{post.title}</li>;
+      return <table key={index}>
+      <tbody>
+      <tr>
+          <td>{post.id}</td>
+          <td>{post.title}</td>
+          <td>{post.body}</td>
+      </tr>
+      </tbody>
+      </table>;
     });
 
     const pageNumbers = [];
