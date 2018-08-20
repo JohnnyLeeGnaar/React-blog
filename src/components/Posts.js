@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
 
-class App extends Component {
+class Posts extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,7 +21,7 @@ class App extends Component {
   fetchPosts() {
     this.setState({ loading: true });
 
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
       .then(posts => {
         this.setState({ posts: posts });
@@ -34,8 +33,6 @@ class App extends Component {
     this.fetchPosts();
   }
 
-
-
   render() {
     const { posts, loading, currentPage, postsPerPage } = this.state;
 
@@ -44,15 +41,19 @@ class App extends Component {
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const renderPosts = currentPosts.map((post, index) => {
-      return <table key={index}>
-      <tbody>
-      <tr>
-          <td>{post.id}</td>
-          <td>{post.title}</td>
-          <td>{post.body}</td>
-      </tr>
-      </tbody>
-      </table>;
+      return loading ? (
+        "...loading"
+      ) : (
+        <table key={index}>
+          <tbody>
+            <tr>
+              <td>{post.id}</td>
+              <td>{post.title}</td>
+              <td>{post.body}</td>
+            </tr>
+          </tbody>
+        </table>
+      );
     });
 
     const pageNumbers = [];
@@ -62,11 +63,7 @@ class App extends Component {
 
     const renderPageNumbers = pageNumbers.map(number => {
       return (
-        <li
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-        >
+        <li key={number} id={number} onClick={this.handleClick}>
           {number}
         </li>
       );
@@ -74,14 +71,11 @@ class App extends Component {
 
     return (
       <div>
-        <ul>
-          {renderPosts}
-        </ul>
-        <ul id="page-numbers">
-          {renderPageNumbers}
-        </ul>
+        <ul>{renderPosts}</ul>
+        <ul id="page-numbers">{renderPageNumbers}</ul>
       </div>
     );
   }
 }
-export default App;
+
+export default Posts;
