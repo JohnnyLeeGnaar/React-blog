@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 
-class Posts extends Component {
+class Comments extends Component {
   render() {
     const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
-    const currentPosts = this.props.posts.slice(
+    const currentPosts = this.props.comments.slice(
       indexOfFirstPost,
       indexOfLastPost
     );
 
-    const renderPosts = currentPosts.map((post, index) => {
+    const renderPosts = currentPosts.map((comment, index) => {
       return this.props.loading ? (
         "...loading"
       ) : (
         <table key={index}>
           <tbody>
             <tr>
-              <td>{post.id}</td>
-              <td>{post.title}</td>
-              <td>{post.body}</td>
+              <td>{comment.id}</td>
+              <td>{comment.name}</td>
+              <td>{comment.email}</td>
+              <td>{comment.body}</td>
             </tr>
           </tbody>
         </table>
@@ -28,7 +29,7 @@ class Posts extends Component {
     const pageNumbers = [];
     for (
       let i = 1;
-      i <= Math.ceil(this.props.posts.length / this.props.postsPerPage);
+      i <= Math.ceil(this.props.comments.length / this.props.postsPerPage);
       i++
     ) {
       pageNumbers.push(i);
@@ -55,11 +56,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
-
-/*render() {
-    return <p>Ovo su brojevi dobitne kombinacije {this.props.posts}.</p>;
-  }
-}
-
-export default Posts;*/
+export default Comments;
