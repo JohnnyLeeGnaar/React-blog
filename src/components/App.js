@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Posts from "./Posts";
+import Post from "./Post";
 import Comments from "./Comments";
 import Users from "./Users";
 import Home from "./Home";
@@ -106,6 +107,8 @@ class App extends Component {
                   />
                 )}
               />
+              <Route path="/posts/:number" component={Post} />
+              )} />
               <Route component={Error} />
             </Switch>
           </div>
@@ -116,20 +119,3 @@ class App extends Component {
 }
 
 export default App;
-
-/*<BrowserRouter>
-        <div>
-          <Navigation />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/posts" component={Posts } />
-            <Route path="/comments" component={Comments } />
-            <Route path="/users" component={Users } />
-            <Route component={Error} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-      
-<Route path="/abc" render={()=><TestWidget num="2" someProp={100}/>}/>
-
-      */

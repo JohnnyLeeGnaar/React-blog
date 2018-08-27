@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Post from "./Post";
+import { Link } from "react-router-dom";
 
 class Posts extends Component {
   render() {
@@ -13,15 +15,19 @@ class Posts extends Component {
       return this.props.loading ? (
         "...loading"
       ) : (
-        <table key={index}>
-          <tbody>
-            <tr>
-              <td>{post.id}</td>
-              <td>{post.title}</td>
-              <td>{post.body}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <p>
+            <ul key={this.props.posts.id}>
+              <li>
+                <Link to={`/posts/${post.id}`}>
+                  Post:
+                  {post.id}
+                </Link>
+              </li>
+            </ul>
+            {post.title}
+          </p>
+        </div>
       );
     });
 
@@ -45,10 +51,10 @@ class Posts extends Component {
         </li>
       );
     });
-
     return (
       <div>
         <ul>{renderPosts}</ul>
+        <div />
         <ul id="page-numbers">{renderPageNumbers}</ul>
       </div>
     );
@@ -56,10 +62,3 @@ class Posts extends Component {
 }
 
 export default Posts;
-
-/*render() {
-    return <p>Ovo su brojevi dobitne kombinacije {this.props.posts}.</p>;
-  }
-}
-
-export default Posts;*/
