@@ -1,6 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Post = () => <p>Post - should show once</p>;
+const Post = props => {
+  return (
+    <div>
+      <h2>{props.match.params.number}</h2>
+      <Link to="/posts">{"go back"}</Link>
+    </div>
+  );
+};
+
 export default Post;
 
 /*

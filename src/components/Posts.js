@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Post from "./Post";
 import { Link } from "react-router-dom";
 
 class Posts extends Component {

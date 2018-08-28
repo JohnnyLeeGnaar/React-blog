@@ -72,6 +72,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route
+                exact
                 path="/posts"
                 render={() => (
                   <Posts
@@ -82,6 +83,10 @@ class App extends Component {
                     handleClick={this.handleClick}
                   />
                 )}
+              />
+              <Route
+                path="/posts/:number"
+                render={props => <Post {...props} id={this.props.id} />}
               />
               <Route
                 path="/comments"
@@ -107,8 +112,6 @@ class App extends Component {
                   />
                 )}
               />
-              <Route path="/posts/:number" component={Post} />
-              )} />
               <Route component={Error} />
             </Switch>
           </div>
