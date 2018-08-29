@@ -86,7 +86,13 @@ class App extends Component {
               />
               <Route
                 path="/posts/:number"
-                render={props => <Post {...props} id={this.props.id} />}
+                render={props => (
+                  <Post
+                    {...props}
+                    id={this.props.id}
+                    posts={this.state.posts}
+                  />
+                )}
               />
               <Route
                 path="/comments"
