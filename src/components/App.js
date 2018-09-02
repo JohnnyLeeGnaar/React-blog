@@ -91,6 +91,7 @@ class App extends Component {
                     {...props}
                     id={this.props.id}
                     posts={this.state.posts}
+                    comments={this.state.comments}
                   />
                 )}
               />

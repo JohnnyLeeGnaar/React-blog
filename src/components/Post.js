@@ -7,20 +7,33 @@ class Post extends Component {
       .filter(post => post.id == this.props.match.params.number)
       .map(post => (
         <div key={post.id}>
-          <h1>Post title: </h1>
-          {post.title}
+          <h1>{post.title}</h1>
           <p>
             Post id:
             {post.id}
           </p>
-          <b>Post body:</b>
+          <b>Post:</b>
           {post.body}
         </div>
       ));
-
+    const renderComments = this.props.comments
+      .filter(comment => comment.postId == this.props.match.params.number)
+      .map(comment => (
+        <div key={comment.id}>
+          <h3>{comment.name}</h3>
+          <p>
+            Mail:
+            {comment.email}
+          </p>
+          {comment.body}
+          <hr />
+        </div>
+      ));
     return (
       <div>
         {renderPost}
+        <hr />
+        {renderComments}
         <Link to="/posts">{"go back"}</Link>
         {console.log(this.props.match.params.number)}
       </div>
